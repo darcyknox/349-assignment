@@ -18,10 +18,12 @@ th, td {
 <body>
 <h1>Database test page</h1>
 
-<p>Showing contents of players table:</p>
+<p>Select 5 players for Team A, and 5 players for Team B:</p>
 
-<table border="1">
-<tr><th>Player name</th><th>Player position</th></tr>
+<form action="#" method="post">
+
+<table id="player-table" border="1">
+<tr><th>Team A</th><th>Team B</th><th>Player name</th><th>Player position</th></tr>
 
 <?php
 
@@ -37,10 +39,17 @@ $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 $q = $pdo->query("SELECT * FROM players");
 
 while($row = $q->fetch()){
-  echo "<tr><td>".$row["name"]."</td><td>".$row["position"]."</td></tr>\n";
+  echo "<tr><td><input type=\"checkbox\" name = ".$row["name"]." value = ".$row["name"]."/></td><td><input type=\"checkbox\" name = ".$row["name"]." value = ".$row["name"]."/></td><td>".$row["name"]."</td><td>".$row["position"]."</td></tr>\n";
 }
 
 ?>
 </table>
+
+<input type="submit" name="formSubmit" value="Submit" />
+
+</form>
+
+<script type="text/javascript" src="/www/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="/www/js/script.js" ></script>
 </body>
 </html>
