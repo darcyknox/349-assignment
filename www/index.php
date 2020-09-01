@@ -18,9 +18,10 @@ th, td {
 <body>
 <h1>Database test page</h1>
 
-<p>Select 5 players for Team A, and 5 players for Team B:</p>
+<p>Select players for Team A, and players for Team B.</p>
+<p>Try to pick the same amount of players for both teams.</p>
 
-<form action="#" method="post">
+<form action="#" method="post" id="player-form">
 
 <table id="player-table" border="1">
 <tr><th>Team A</th><th>Team B</th><th>Player name</th><th>Player position</th></tr>
@@ -38,16 +39,46 @@ $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
 $q = $pdo->query("SELECT * FROM players");
 
+$playerrattings = array();
+
 while($row = $q->fetch()){
-  echo "<tr><td><input type=\"checkbox\" name = ".$row["name"]." value = ".$row["name"]."/></td><td><input type=\"checkbox\" name = ".$row["name"]." value = ".$row["name"]."/></td><td>".$row["name"]."</td><td>".$row["position"]."</td></tr>\n";
+  echo "<tr><td><input type=\"checkbox\" name =\"a-player[]\" value = ".$row["lname"]."/></td><td><input type=\"checkbox\" name = \"b-player[]\" value = ".$row["lname"]."/></td><td>".$row["fname"]." ".$row["lname"]."</td><td>".$row["position"]."</td></tr>\n";
+  $playerrattings[$row["lname"]] = $row["rating"];
 }
 
 ?>
 </table>
 
-<input type="submit" name="formSubmit" value="Submit" />
+<input type="submit" name="submit" value="Submit" />
 
 </form>
+
+<?php
+if(isset($_POST['submit'])){
+    $selected_a_players = $_POST['a-player'];  // Storing Selected Value In Variable
+    $selected_b_players = $_POST['b-player'];
+    echo "<h1>Submitted</h1>";
+
+    $N = count($selected_a_players);
+    echo("<h2>Team A:</h2>");
+    echo("<ul>");
+    for($i = 0; $i < $N; $i++) {
+      echo("<li>".$selected_a_players[$i]."</li>");
+    }
+    echo("</ul>");
+    echo("\n");
+    $N = count($selected_b_players);
+    echo("<h2>Team B:</h2>");
+    echo("<ul>");
+    for($i = 0; $i < $N; $i++) {
+      echo("<li>".$selected_b_players[$i]."</li>");
+    }
+    echo("</ul>");
+
+    echo json_encode($playerrattings);
+}
+
+?>
 
 <script type="text/javascript" src="/www/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="/www/js/script.js" ></script>
