@@ -19,5 +19,6 @@ INSERT INTO players VALUES ('Bill','Russell','Center',90);
 INSERT INTO players VALUES ('Charles','Barkley','Forward',91);
 INSERT INTO players VALUES ('Kevin','Durant','Forward',96);
 INSERT INTO players VALUES ('Stephen','Curry','Guard',94);
-INSERT INTO players VALUES ('Hakeem','Olajuwan','Center',93);
+INSERT INTO players VALUES ('Hakeem','Olajuwon','Center',93);
 INSERT INTO players VALUES ('Oscar','Robertson','Guard',90);
+INSERT INTO players VALUES ('Larry','Bird','Forward',93);

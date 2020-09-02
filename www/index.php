@@ -59,11 +59,15 @@ if(isset($_POST['submit'])){
     $selected_b_players = $_POST['b-player'];
     echo "<h1>Submitted</h1>";
 
+    $a_player_ratings = array();
+    $b_player_ratings = array();
+
     $N = count($selected_a_players);
     echo("<h2>Team A:</h2>");
     echo("<ul>");
     for($i = 0; $i < $N; $i++) {
       echo("<li>".$selected_a_players[$i]."</li>");
+      $a_player_ratings[rtrim($selected_a_players[$i], '/')] = $playerrattings[rtrim($selected_a_players[$i], '/')];
     }
     echo("</ul>");
     echo("\n");
@@ -71,9 +75,14 @@ if(isset($_POST['submit'])){
     echo("<h2>Team B:</h2>");
     echo("<ul>");
     for($i = 0; $i < $N; $i++) {
-      echo("<li>".$selected_b_players[$i]."</li>");
+      echo("<li>".rtrim($selected_b_players[$i], '/')."</li>");
+      $b_player_ratings[rtrim($selected_b_players[$i], '/')] = $playerrattings[rtrim($selected_b_players[$i], '/')];
     }
     echo("</ul>");
+
+
+    echo json_encode($a_player_ratings);
+    echo json_encode($b_player_ratings);
 
     echo json_encode($playerrattings);
 }
