@@ -58,7 +58,6 @@ if(isset($_POST['submit'])){
     $selected_a_players = $_POST['a-player'];  // Storing Selected Value In Variable
     $selected_b_players = $_POST['b-player'];
     echo "<h1>Submitted</h1>";
-
     $a_player_ratings = array();
     $b_player_ratings = array();
 
@@ -89,7 +88,48 @@ if(isset($_POST['submit'])){
 
 ?>
 
-<script type="text/javascript" src="/www/js/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="/www/js/script.js" ></script>
+
+<script type="text/javascript">
+  fetch('http://192.168.33.12', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8'
+    },
+    mode: 'no-cors',
+    body: {'James':98,'Curry':94}
+  })
+  .then(data => data.json())
+  .then(res => {
+    console.log('Success:', res);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+</script>
+
+<!--
+<script type="text/javascript">
+  const formData = new FormData();
+  const fileField = document.querySelector('input[type="file"]');
+
+  formData.append('username', 'abc123');
+  formData.append('avatar', fileField.files[0]);
+
+  fetch('http://192.168.33.10/data.json', {
+    method: 'PUT',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log('Success:', result);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+</script>
+-->
+
+<script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="js/script.js" ></script>
 </body>
 </html>
