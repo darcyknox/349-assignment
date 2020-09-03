@@ -83,19 +83,22 @@ if(isset($_POST['submit'])){
     echo json_encode($a_player_ratings);
     echo json_encode($b_player_ratings);
 
-    echo json_encode($playerrattings);
+    //echo json_encode($playerrattings);
 
     // Inserting into team tests
 
     $pdo->query("TRUNCATE TABLE team");
 
     $pdo->query("INSERT INTO team VALUES ('Darcy','Knox','guard',88)");
+    $pdo->query("INSERT INTO team VALUES ('Matthew','Bardsley','guard',4)");
+
 
     $q = $pdo->query("SELECT * FROM team");
 
     while($row = $q->fetch()){
       echo ($row["lastname"]);
     }
+
 
     $N = count($a_player_ratings);
     //echo($N);
@@ -117,10 +120,11 @@ if(isset($_POST['submit'])){
     function test_insert($rating, $lname) {
       echo "$lname. $rating<br />\n";
       $f = 'first';
-      $pdo->query("INSERT INTO team VALUES ('$f','$lname','Guard',$rating)");
+      $pdo->query("INSERT INTO team VALUES ('$f','$lname','Guard','$rating')");
     }
 
     array_walk($a_player_ratings, 'test_insert');
+    array_walk($a_player_ratings, 'test_print');
 
     // Insert into players test
     $fn = 'Matty';
@@ -128,51 +132,16 @@ if(isset($_POST['submit'])){
 
     $pdo->query("INSERT INTO team VALUES ('$fn','$ln','Guard',7)");
 
+    $q = $pdo->query("SELECT * FROM team");
+
+    while($row = $q->fetch()){
+      echo ($row["lastname"]);
+    }
 
 }
 
 ?>
 
-
-<script type="text/javascript">
-  fetch('http://192.168.33.12', {
-    method: 'POST', // or 'PUT'
-    headers: {
-      'Content-Type': 'application/json; charset=UTF-8'
-    },
-    mode: 'no-cors',
-    body: {'James':98,'Curry':94}
-  })
-  .then(data => data.json())
-  .then(res => {
-    console.log('Success:', res);
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
-</script>
-
-<!--
-<script type="text/javascript">
-  const formData = new FormData();
-  const fileField = document.querySelector('input[type="file"]');
-
-  formData.append('username', 'abc123');
-  formData.append('avatar', fileField.files[0]);
-
-  fetch('http://192.168.33.10/data.json', {
-    method: 'PUT',
-    body: formData
-  })
-  .then(response => response.json())
-  .then(result => {
-    console.log('Success:', result);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-</script>
--->
 
 <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="js/script.js" ></script>
