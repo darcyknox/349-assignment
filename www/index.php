@@ -84,6 +84,38 @@ if(isset($_POST['submit'])){
     echo json_encode($b_player_ratings);
 
     echo json_encode($playerrattings);
+
+    // Inserting into team tests
+
+    $pdo->query("TRUNCATE TABLE team");
+
+    $pdo->query("INSERT INTO team VALUES ('Darcy','Knox','guard',88)");
+
+    $q = $pdo->query("SELECT * FROM team");
+
+    while($row = $q->fetch()){
+      echo ($row["lastname"]);
+    }
+
+    $N = count($a_player_ratings);
+    //echo($N);
+    for($i = 0; $i < $N; $i++) {
+      $key = key($a_player_ratings[$i]);
+      $pdo->query("INSERT INTO team VALUES ('Darcy','Knox','guard',88)");
+    }
+
+    // Insert into players test
+    $fn = 'Matty';
+    $ln = 'Bardsley';
+
+    $pdo->query("INSERT INTO team VALUES ('$fn','$ln','Guard',7)");
+
+    $q = $pdo->query("SELECT * FROM team");
+
+    while($row = $q->fetch()){
+      echo ($row["lastname"]);
+    }
+
 }
 
 ?>

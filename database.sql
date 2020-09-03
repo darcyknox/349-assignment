@@ -6,6 +6,14 @@ CREATE TABLE players (
   PRIMARY KEY (lname)
 );
 
+CREATE TABLE team (
+  firstname varchar(20) NOT NULL,
+  lastname varchar(20) NOT NULL,
+  pos varchar(10),
+  rtg tinyint,
+  PRIMARY KEY (lastname)
+);
+
 INSERT INTO players VALUES ('LeBron','James','Forward',98);
 INSERT INTO players VALUES ('Michael','Jordan','Guard',99);
 INSERT INTO players VALUES ('Kareem','Abdul-Jabbar','Center',95);
