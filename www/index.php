@@ -100,9 +100,27 @@ if(isset($_POST['submit'])){
     $N = count($a_player_ratings);
     //echo($N);
     for($i = 0; $i < $N; $i++) {
-      $key = key($a_player_ratings[$i]);
+      echo (key($a_player_ratings[$i]));
       $pdo->query("INSERT INTO team VALUES ('Darcy','Knox','guard',88)");
     }
+
+    // Testing putting variables into query strings
+
+    function test_print($item2, $key) {
+      echo "$key. $item2<br />\n";
+    }
+
+    //array_walk($a_player_ratings, 'test_print');
+
+    // Insert into team using function test
+
+    function test_insert($rating, $lname) {
+      echo "$lname. $rating<br />\n";
+      $f = 'first';
+      $pdo->query("INSERT INTO team VALUES ('$f','$lname','Guard',$rating)");
+    }
+
+    array_walk($a_player_ratings, 'test_insert');
 
     // Insert into players test
     $fn = 'Matty';
@@ -110,11 +128,6 @@ if(isset($_POST['submit'])){
 
     $pdo->query("INSERT INTO team VALUES ('$fn','$ln','Guard',7)");
 
-    $q = $pdo->query("SELECT * FROM team");
-
-    while($row = $q->fetch()){
-      echo ($row["lastname"]);
-    }
 
 }
 
