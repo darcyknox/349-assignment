@@ -54,7 +54,13 @@ while($row = $q->fetch()){
 </form>
 
 <?php
+
+
+
 if(isset($_POST['submit'])){
+
+    $pdo->query("TRUNCATE TABLE team");
+
     $selected_a_players = $_POST['a-player'];  // Storing Selected Value In Variable
     $selected_b_players = $_POST['b-player'];
     echo "<h1>Submitted</h1>";
@@ -65,7 +71,7 @@ if(isset($_POST['submit'])){
     echo("<h2>Team A:</h2>");
     echo("<ul>");
     for($i = 0; $i < $N; $i++) {
-      echo("<li>".$selected_a_players[$i]."</li>");
+      echo("<li>".rtrim($selected_a_players[$i], '/')."</li>");
       $a_player_ratings[rtrim($selected_a_players[$i], '/')] = $playerrattings[rtrim($selected_a_players[$i], '/')];
     }
     echo("</ul>");
@@ -75,67 +81,72 @@ if(isset($_POST['submit'])){
     echo("<ul>");
     for($i = 0; $i < $N; $i++) {
       echo("<li>".rtrim($selected_b_players[$i], '/')."</li>");
-      $b_player_ratings[rtrim($selected_b_players[$i], '/')] = $playerrattings[rtrim($selected_b_players[$i], '/')];
+      $key = $b_player_ratings[rtrim($selected_b_players[$i], '/')];
+      $val = $playerrattings[rtrim($selected_b_players[$i], '/')];
+      //$b_player_ratings[rtrim($selected_b_players[$i], '/')] = $playerrattings[rtrim($selected_b_players[$i], '/')];
+      $key = $val;
     }
     echo("</ul>");
 
 
-    echo json_encode($a_player_ratings);
-    echo json_encode($b_player_ratings);
+    //echo json_encode($a_player_ratings);
+    //echo json_encode($b_player_ratings);
 
     //echo json_encode($playerrattings);
 
     // Inserting into team tests
 
-    $pdo->query("TRUNCATE TABLE team");
 
-    $pdo->query("INSERT INTO team VALUES ('Darcy','Knox','guard',88)");
-    $pdo->query("INSERT INTO team VALUES ('Matthew','Bardsley','guard',4)");
 
+    $pdo->query("INSERT INTO team VALUES ('Knox','40')");
+    $pdo->query("INSERT INTO team VALUES ('Bardsley','37')");
 
     $q = $pdo->query("SELECT * FROM team");
 
+    /*
     while($row = $q->fetch()){
-      echo ($row["lastname"]);
+      echo ($row["lname"]);
     }
-
-
-    $N = count($a_player_ratings);
-    //echo($N);
-    for($i = 0; $i < $N; $i++) {
-      echo (key($a_player_ratings[$i]));
-      $pdo->query("INSERT INTO team VALUES ('Darcy','Knox','guard',88)");
-    }
+    */
 
     // Testing putting variables into query strings
 
     function test_print($item2, $key) {
-      echo "$key. $item2<br />\n";
+      echo "$key: $item2<br />\n";
     }
+
 
     //array_walk($a_player_ratings, 'test_print');
 
+    // Insert using variables
+
+    $ln = 'Aitcheson';
+    $rt = 43;
+    $pdo->query("INSERT INTO team VALUES ('$ln','$rt')");
+
+    // Insert using explicit array elements
+
+    foreach($a_player_ratings as $key => $value) {
+      $pdo->query("INSERT INTO team VALUES ('$key','$value')");
+    }
+
     // Insert into team using function test
 
-    function test_insert($rating, $lname) {
-      echo "$lname. $rating<br />\n";
-      $f = 'first';
-      $pdo->query("INSERT INTO team VALUES ('$f','$lname','Guard','$rating')");
+    function test_insert($rtg, $lastname) {
+      //echo('here');
+      //$query = "INSERT INTO team (lname, rating) VALUES(:lname, :rating)";
+      //$stmt = $pdo->prepare($query);
+      //$stmt->execute([$lastname, $rtg]);
     }
 
     array_walk($a_player_ratings, 'test_insert');
-    array_walk($a_player_ratings, 'test_print');
-
-    // Insert into players test
-    $fn = 'Matty';
-    $ln = 'Bardsley';
-
-    $pdo->query("INSERT INTO team VALUES ('$fn','$ln','Guard',7)");
 
     $q = $pdo->query("SELECT * FROM team");
 
     while($row = $q->fetch()){
-      echo ($row["lastname"]);
+      echo ($row["lname"]);
+      echo ($row["rating"]);
+      echo ("<br />\n");
     }
 
 }

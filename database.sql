@@ -7,11 +7,9 @@ CREATE TABLE players (
 );
 
 CREATE TABLE team (
-  firstname varchar(20) NOT NULL,
-  lastname varchar(20) NOT NULL,
-  pos varchar(10),
-  rtg tinyint,
-  PRIMARY KEY (lastname)
+  lname varchar(20) NOT NULL,
+  rating varchar(20),
+  PRIMARY KEY (lname)
 );
 
 INSERT INTO players VALUES ('LeBron','James','Forward',98);
