@@ -63,7 +63,7 @@ if(isset($_POST['submit'])){
 
     $selected_a_players = $_POST['a-player'];  // Storing Selected Value In Variable
     $selected_b_players = $_POST['b-player'];
-    echo "<h1>Submitted</h1>";
+    echo "<h1><a href='http://192.168.33.12'>Click here</a></h1>";
     $a_player_ratings = array();
     $b_player_ratings = array();
 
@@ -83,27 +83,22 @@ if(isset($_POST['submit'])){
       echo("<li>".rtrim($selected_b_players[$i], '/')."</li>");
       $key = $b_player_ratings[rtrim($selected_b_players[$i], '/')];
       $val = $playerrattings[rtrim($selected_b_players[$i], '/')];
-      //$b_player_ratings[rtrim($selected_b_players[$i], '/')] = $playerrattings[rtrim($selected_b_players[$i], '/')];
       $key = $val;
     }
     echo("</ul>");
 
-
-    //echo json_encode($a_player_ratings);
-    //echo json_encode($b_player_ratings);
-
-    //echo json_encode($playerrattings);
-
     // Inserting into team tests
 
-
-
+    // Explicit insert
+    /*
     $pdo->query("INSERT INTO team VALUES ('Knox','40')");
     $pdo->query("INSERT INTO team VALUES ('Bardsley','37')");
+    */
 
+    // Get table state
+    /*
     $q = $pdo->query("SELECT * FROM team");
 
-    /*
     while($row = $q->fetch()){
       echo ($row["lname"]);
     }
@@ -119,27 +114,19 @@ if(isset($_POST['submit'])){
     //array_walk($a_player_ratings, 'test_print');
 
     // Insert using variables
-
+    /*
     $ln = 'Aitcheson';
     $rt = 43;
     $pdo->query("INSERT INTO team VALUES ('$ln','$rt')");
+    */
 
     // Insert using explicit array elements
 
-    foreach($a_player_ratings as $key => $value) {
-      $pdo->query("INSERT INTO team VALUES ('$key','$value')");
+    foreach($a_player_ratings as $lname => $rating) {
+      $pdo->query("INSERT INTO team VALUES ('$lname','$rating')");
     }
 
-    // Insert into team using function test
-
-    function test_insert($rtg, $lastname) {
-      //echo('here');
-      //$query = "INSERT INTO team (lname, rating) VALUES(:lname, :rating)";
-      //$stmt = $pdo->prepare($query);
-      //$stmt->execute([$lastname, $rtg]);
-    }
-
-    array_walk($a_player_ratings, 'test_insert');
+    // Get table state
 
     $q = $pdo->query("SELECT * FROM team");
 

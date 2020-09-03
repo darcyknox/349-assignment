@@ -17,41 +17,59 @@ th, td {
 
 <body>
   <h1>Test page 2</h1>
-</body>
+  <p><a href="http://192.168.33.10">Return to player selection</a></p>
 
-<!--
-<script type="text/javascript">
-  fetch('http://192.168.33.10/data.json', {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    mode: 'no-cors',
-  })
-  .then(response => {
-    console.log("response = " + response.text())
-    return response.text()
-  })
-  .then(data => console.log(data));
-</script>
--->
 
-<!--
-<script type="text/javascript">
-  fetch('http://192.168.33.10/data.json', {
-    mode: 'no-cors'
-  })
-  .then(response => response.json())
-  .then(data => console.log(data));
-</script>
--->
+<?php
+
+  $db_host   = '192.168.33.11';
+  $db_name   = 'fvision';
+  $db_user   = 'webuser';
+  $db_passwd = 'insecure_db_pw';
+
+  $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
+
+  $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
+
+  $newarray = array();
+
+  // Get table state
+
+  $q = $pdo->query("SELECT * FROM team");
+
+  while($row = $q->fetch()){
+    $newarray[$row["lname"]] = $row["rating"];
+  }
+
+  foreach($newarray as $key => $val) {
+    echo($key." : ");
+    echo($val);
+    echo ("<br />\n");
+  }
+
+  $jsondata = json_encode($newarray);
+
+  $bytes = file_put_contents("data.json", $jsondata);
+  echo ("The number of bytes written are $bytes");
+
+  /*
+  while($row = $q->fetch()){
+    echo ($row["lname"]);
+    echo ($row["rating"]);
+    echo ("<br />\n");
+  }
+  */
+
+?>
+
 <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
 
-<script type="text/javascript">
-  const url = 'http://192.168.33.10//data.json';
-  $.getJSON(url, function(result) {
-    console.log(result)
-  });
+<script type="text/javascript" src="data.json">
+
+  // Handle JSON here
+
 </script>
+
+</body>
 
 </html>
