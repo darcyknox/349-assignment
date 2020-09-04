@@ -2,21 +2,19 @@
 <html>
 <head><title>Database test page</title>
 <style>
-th { text-align: left; }
 
-table, th, td {
-  border: 2px solid grey;
-  border-collapse: collapse;
-}
+  html { text-align: center; }
 
-th, td {
-  padding: 0.2em;
-}
 </style>
 </head>
 
 <body>
-  <h1>Test page 2</h1>
+  <h1>Results page</h1>
+
+  <button type="button" name="button">See results</button>
+
+  <h2 id="winText"></h2>
+
   <p><a href="http://192.168.33.10">Return to player selection</a></p>
 
 
@@ -87,8 +85,14 @@ th, td {
 
 <script type="text/javascript">
 
-  let teamAscore, teamBscore;
+  let teamAscore;
   let teamArating = 0;
+  let teamBscore;
+  let teamBrating = 0;
+
+  let winScore = Math.ceil(Math.random() * (120 - 70) + 70);
+  let loserScore = Math.floor(Math.random() * (winScore - 70) + 70);
+  let winnerText;
 
   // Handle JSON here
 
@@ -96,6 +100,20 @@ th, td {
     var items = [];
     $.each( data, function( key, val ) {
       teamArating += parseInt(val);
+      items.push( "<li id='" + key + "'>" + val + "</li>" );
+    });
+
+    $( "<ul/>", {
+      "class": "my-new-list",
+      html: items.join( "" )
+    }).appendTo( "body" );
+    console.log("Team A: " + teamArating);
+  });
+
+  $.getJSON( "oppteam.json", function( data ) {
+    var items = [];
+    $.each( data, function( key, val ) {
+      teamBrating += parseInt(val);
       //console.log(teamArating);
       items.push( "<li id='" + key + "'>" + val + "</li>" );
     });
@@ -104,10 +122,24 @@ th, td {
       "class": "my-new-list",
       html: items.join( "" )
     }).appendTo( "body" );
-    console.log(teamArating);
+    console.log("Team B: " + teamBrating);
+
+    if (teamArating > teamBrating) {
+      teamAscore = winScore;
+      teamBscore = loserScore;
+      winnerText = "Team A wins ";
+    } else if (teamArating < teamBrating) {
+      teamAscore = loserScore;
+      teamBscore = winScore;
+      winnerText = "Team B wins ";
+    }
+
   });
 
 
+  $("button").click(() => {
+    $("#winText").html(winnerText + winScore + " - " + loserScore);
+  });
 
 
 </script>

@@ -2,16 +2,32 @@
 <html>
 <head><title>Database test page</title>
 <style>
+
+html { text-align: center; }
+
 th { text-align: left; }
 
 table, th, td {
+  text-align: center;
   border: 2px solid grey;
   border-collapse: collapse;
+  margin: 0 auto;
 }
 
 th, td {
   padding: 0.2em;
 }
+
+#submit-button {
+  font-size: 16px;
+  padding: 5px;
+  margin: 5px;
+}
+
+ul {
+  list-style-type: none;
+}
+
 </style>
 </head>
 
@@ -49,7 +65,7 @@ while($row = $q->fetch()){
 ?>
 </table>
 
-<input type="submit" name="submit" value="Submit" />
+<input type="submit" name="submit" value="Submit" id="submit-button"/>
 
 </form>
 
@@ -64,7 +80,7 @@ if(isset($_POST['submit'])){
 
     $selected_a_players = $_POST['a-player'];  // Storing Selected Value In Variable
     $selected_b_players = $_POST['b-player'];
-    echo "<h1><a href='http://192.168.33.12'>Click here</a></h1>";
+    echo "<h1><a href='http://192.168.33.12'>Click here to see who wins...</a></h1>";
     $a_player_ratings = array();
     $b_player_ratings = array();
 
@@ -131,11 +147,13 @@ if(isset($_POST['submit'])){
 
     $q = $pdo->query("SELECT * FROM team");
 
+    /*
     while($row = $q->fetch()){
       echo ($row["lname"]);
       echo ($row["rating"]);
       echo ("<br />\n");
     }
+    */
 
     // Opponent team
 
@@ -147,11 +165,13 @@ if(isset($_POST['submit'])){
 
     $q = $pdo->query("SELECT * FROM opp");
 
+    /*
     while($row = $q->fetch()){
       echo ($row["lname"]);
       echo ($row["rating"]);
       echo ("<br />\n");
     }
+    */
 
 }
 
