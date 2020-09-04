@@ -32,7 +32,7 @@ ul {
 </head>
 
 <body>
-<h1>Database test page</h1>
+<h1>NBA Greats Game Simulator</h1>
 
 <p>Select players for Team A, and players for Team B.</p>
 <p>Try to pick the same amount of players for both teams.</p>
