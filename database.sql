@@ -6,13 +6,13 @@ CREATE TABLE players (
   PRIMARY KEY (lname)
 );
 
-CREATE TABLE team (
+CREATE TABLE teamA (
   lname varchar(20) NOT NULL,
   rating varchar(20),
   PRIMARY KEY (lname)
 );
 
-CREATE TABLE opp (
+CREATE TABLE teamB (
   lname varchar(20) NOT NULL,
   rating varchar(20),
   PRIMARY KEY (lname)
@@ -20,10 +20,10 @@ CREATE TABLE opp (
 
 INSERT INTO players VALUES ('LeBron','James','Forward',98);
 INSERT INTO players VALUES ('Michael','Jordan','Guard',99);
-INSERT INTO players VALUES ('Kareem','Abdul-Jabbar','Center',95);
+INSERT INTO players VALUES ('Kareem','Abdul-Jabbar','Center',96);
 INSERT INTO players VALUES ('John','Stockton','Guard',90);
 INSERT INTO players VALUES ('Kobe','Bryant','Guard',96);
-INSERT INTO players VALUES ('Shaquille','O\'Neal','Center',96);
+INSERT INTO players VALUES ('Shaquille','ONeal','Center',96);
 INSERT INTO players VALUES ('Magic','Johnson','Guard',94);
 INSERT INTO players VALUES ('Wilt','Chamberlain','Center',93);
 INSERT INTO players VALUES ('Tim','Duncan','Forward',94);

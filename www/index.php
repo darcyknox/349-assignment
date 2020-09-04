@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html>
-<head><title>Database test page</title>
+<head><title>NBA Greats Game Simulator</title>
 <style>
 
 html { text-align: center; }
@@ -75,8 +75,8 @@ while($row = $q->fetch()){
 
 if(isset($_POST['submit'])){
 
-    $pdo->query("TRUNCATE TABLE team");
-    $pdo->query("TRUNCATE TABLE opp");
+    $pdo->query("TRUNCATE TABLE teamA");
+    $pdo->query("TRUNCATE TABLE teamB");
 
     $selected_a_players = $_POST['a-player'];  // Storing Selected Value In Variable
     $selected_b_players = $_POST['b-player'];
@@ -106,13 +106,13 @@ if(isset($_POST['submit'])){
 
     // Explicit insert
     /*
-    $pdo->query("INSERT INTO team VALUES ('Knox','40')");
-    $pdo->query("INSERT INTO team VALUES ('Bardsley','37')");
+    $pdo->query("INSERT INTO teamA VALUES ('Knox','40')");
+    $pdo->query("INSERT INTO teamA VALUES ('Bardsley','37')");
     */
 
     // Get table state
     /*
-    $q = $pdo->query("SELECT * FROM team");
+    $q = $pdo->query("SELECT * FROM teamA");
 
     while($row = $q->fetch()){
       echo ($row["lname"]);
@@ -132,7 +132,7 @@ if(isset($_POST['submit'])){
     /*
     $ln = 'Aitcheson';
     $rt = 43;
-    $pdo->query("INSERT INTO team VALUES ('$ln','$rt')");
+    $pdo->query("INSERT INTO teamA VALUES ('$ln','$rt')");
     */
 
     // Insert using explicit array elements
@@ -140,14 +140,14 @@ if(isset($_POST['submit'])){
     // Home team
 
     foreach($a_player_ratings as $lname => $rating) {
-      $pdo->query("INSERT INTO team VALUES ('$lname','$rating')");
+      $pdo->query("INSERT INTO teamA VALUES ('$lname','$rating')");
     }
 
     // Get table state
 
-    $q = $pdo->query("SELECT * FROM team");
-
     /*
+    $q = $pdo->query("SELECT * FROM teamA");
+
     while($row = $q->fetch()){
       echo ($row["lname"]);
       echo ($row["rating"]);
@@ -155,17 +155,18 @@ if(isset($_POST['submit'])){
     }
     */
 
-    // Opponent team
+    // teamBonent team
 
     foreach($b_player_ratings as $lname => $rating) {
-      $pdo->query("INSERT INTO opp VALUES ('$lname','$rating')");
+      $pdo->query("INSERT INTO teamB VALUES ('$lname','$rating')");
     }
 
     // Get table state
 
-    $q = $pdo->query("SELECT * FROM opp");
 
     /*
+    $q = $pdo->query("SELECT * FROM teamB");
+
     while($row = $q->fetch()){
       echo ($row["lname"]);
       echo ($row["rating"]);

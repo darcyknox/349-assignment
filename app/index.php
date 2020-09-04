@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html>
-<head><title>Database test page</title>
+<head><title>NBA Greats Game Simulator</title>
 <style>
 
   html { text-align: center; }
@@ -33,11 +33,13 @@
 
   // Get table state
 
-  $q = $pdo->query("SELECT * FROM team");
+  $q = $pdo->query("SELECT * FROM teamA");
 
   while($row = $q->fetch()){
     $teamA[$row["lname"]] = $row["rating"];
   }
+
+  echo("<h4>Team A player ratings</h4>");
 
   foreach($teamA as $key => $val) {
     echo($key." : ");
@@ -47,29 +49,29 @@
 
   $jsondata = json_encode($teamA);
 
-  $bytes = file_put_contents("data.json", $jsondata);
-  //echo ("The number of bytes written are $bytes");
+  $bytes = file_put_contents("teamA.json", $jsondata);
 
-  // Opp team
+  // teamB
 
-  $oppteam = array();
+  $teamB = array();
 
-  $q = $pdo->query("SELECT * FROM opp");
+  $q = $pdo->query("SELECT * FROM teamB");
 
   while($row = $q->fetch()){
-    $oppteam[$row["lname"]] = $row["rating"];
+    $teamB[$row["lname"]] = $row["rating"];
   }
 
-  foreach($oppteam as $key => $val) {
+  echo("<h4>Team B player ratings</h4>");
+
+  foreach($teamB as $key => $val) {
     echo($key." : ");
     echo($val);
     echo ("<br />\n");
   }
 
-  $jsondata = json_encode($oppteam);
+  $jsondata = json_encode($teamB);
 
-  $bytes = file_put_contents("oppteam.json", $jsondata);
-  //echo ("The number of bytes written are $bytes");
+  $bytes = file_put_contents("teamB.json", $jsondata);
 
   /*
   while($row = $q->fetch()){
@@ -96,34 +98,27 @@
 
   // Handle JSON here
 
-  $.getJSON( "data.json", function( data ) {
-    var items = [];
+  $.getJSON( "teamA.json", function( data ) {
     $.each( data, function( key, val ) {
       teamArating += parseInt(val);
-      items.push( "<li id='" + key + "'>" + val + "</li>" );
     });
-
-    $( "<ul/>", {
-      "class": "my-new-list",
-      html: items.join( "" )
-    }).appendTo( "body" );
     console.log("Team A: " + teamArating);
   });
 
-  $.getJSON( "oppteam.json", function( data ) {
-    var items = [];
+  $.getJSON( "teamB.json", function( data ) {
     $.each( data, function( key, val ) {
       teamBrating += parseInt(val);
-      //console.log(teamArating);
-      items.push( "<li id='" + key + "'>" + val + "</li>" );
     });
-
-    $( "<ul/>", {
-      "class": "my-new-list",
-      html: items.join( "" )
-    }).appendTo( "body" );
     console.log("Team B: " + teamBrating);
 
+
+
+  });
+
+  // Button handler
+  $("button").click(() => {
+
+    // Determine winner based on aggregate player rating
     if (teamArating > teamBrating) {
       teamAscore = winScore;
       teamBscore = loserScore;
@@ -134,11 +129,8 @@
       winnerText = "Team B wins ";
     }
 
-  });
-
-
-  $("button").click(() => {
     $("#winText").html(winnerText + winScore + " - " + loserScore);
+
   });
 
 
