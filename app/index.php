@@ -73,14 +73,6 @@
 
   $bytes = file_put_contents("teamB.json", $jsondata);
 
-  /*
-  while($row = $q->fetch()){
-    echo ($row["lname"]);
-    echo ($row["rating"]);
-    echo ("<br />\n");
-  }
-  */
-
 ?>
 
 <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>

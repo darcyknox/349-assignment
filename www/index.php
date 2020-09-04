@@ -78,7 +78,7 @@ if(isset($_POST['submit'])){
     $pdo->query("TRUNCATE TABLE teamA");
     $pdo->query("TRUNCATE TABLE teamB");
 
-    $selected_a_players = $_POST['a-player'];  // Storing Selected Value In Variable
+    $selected_a_players = $_POST['a-player'];
     $selected_b_players = $_POST['b-player'];
     echo "<h1><a href='http://192.168.33.12'>Click here to see who wins...</a></h1>";
     $a_player_ratings = array();
@@ -102,82 +102,23 @@ if(isset($_POST['submit'])){
     }
     echo("</ul>");
 
-    // Inserting into team tests
-
-    // Explicit insert
-    /*
-    $pdo->query("INSERT INTO teamA VALUES ('Knox','40')");
-    $pdo->query("INSERT INTO teamA VALUES ('Bardsley','37')");
-    */
-
-    // Get table state
-    /*
-    $q = $pdo->query("SELECT * FROM teamA");
-
-    while($row = $q->fetch()){
-      echo ($row["lname"]);
-    }
-    */
-
-    // Testing putting variables into query strings
-
-    function test_print($item2, $key) {
-      echo "$key: $item2<br />\n";
-    }
-
-
-    //array_walk($a_player_ratings, 'test_print');
-
-    // Insert using variables
-    /*
-    $ln = 'Aitcheson';
-    $rt = 43;
-    $pdo->query("INSERT INTO teamA VALUES ('$ln','$rt')");
-    */
-
     // Insert using explicit array elements
 
-    // Home team
+    // teamA
 
     foreach($a_player_ratings as $lname => $rating) {
       $pdo->query("INSERT INTO teamA VALUES ('$lname','$rating')");
     }
 
-    // Get table state
-
-    /*
-    $q = $pdo->query("SELECT * FROM teamA");
-
-    while($row = $q->fetch()){
-      echo ($row["lname"]);
-      echo ($row["rating"]);
-      echo ("<br />\n");
-    }
-    */
-
-    // teamBonent team
+    // teamB
 
     foreach($b_player_ratings as $lname => $rating) {
       $pdo->query("INSERT INTO teamB VALUES ('$lname','$rating')");
     }
 
-    // Get table state
-
-
-    /*
-    $q = $pdo->query("SELECT * FROM teamB");
-
-    while($row = $q->fetch()){
-      echo ($row["lname"]);
-      echo ($row["rating"]);
-      echo ("<br />\n");
-    }
-    */
-
 }
 
 ?>
-
 
 <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="js/script.js" ></script>
