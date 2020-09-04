@@ -64,9 +64,30 @@ th, td {
 
 <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
 
-<script type="text/javascript" src="data.json">
+<script type="text/javascript">
+
+  let teamAscore, teamBscore;
+  let teamArating = 0;
 
   // Handle JSON here
+
+  $.getJSON( "data.json", function( data ) {
+    var items = [];
+    $.each( data, function( key, val ) {
+      teamArating += parseInt(val);
+      //console.log(teamArating);
+      items.push( "<li id='" + key + "'>" + val + "</li>" );
+    });
+
+    $( "<ul/>", {
+      "class": "my-new-list",
+      html: items.join( "" )
+    }).appendTo( "body" );
+    console.log(teamArating);
+  });
+
+
+
 
 </script>
 
