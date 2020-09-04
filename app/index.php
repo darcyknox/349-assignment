@@ -31,26 +31,47 @@ th, td {
 
   $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
-  $newarray = array();
+  $teamA = array();
 
   // Get table state
 
   $q = $pdo->query("SELECT * FROM team");
 
   while($row = $q->fetch()){
-    $newarray[$row["lname"]] = $row["rating"];
+    $teamA[$row["lname"]] = $row["rating"];
   }
 
-  foreach($newarray as $key => $val) {
+  foreach($teamA as $key => $val) {
     echo($key." : ");
     echo($val);
     echo ("<br />\n");
   }
 
-  $jsondata = json_encode($newarray);
+  $jsondata = json_encode($teamA);
 
   $bytes = file_put_contents("data.json", $jsondata);
-  echo ("The number of bytes written are $bytes");
+  //echo ("The number of bytes written are $bytes");
+
+  // Opp team
+
+  $oppteam = array();
+
+  $q = $pdo->query("SELECT * FROM opp");
+
+  while($row = $q->fetch()){
+    $oppteam[$row["lname"]] = $row["rating"];
+  }
+
+  foreach($oppteam as $key => $val) {
+    echo($key." : ");
+    echo($val);
+    echo ("<br />\n");
+  }
+
+  $jsondata = json_encode($oppteam);
+
+  $bytes = file_put_contents("oppteam.json", $jsondata);
+  //echo ("The number of bytes written are $bytes");
 
   /*
   while($row = $q->fetch()){

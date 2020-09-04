@@ -39,11 +39,11 @@ $pdo = new PDO($pdo_dsn, $db_user, $db_passwd);
 
 $q = $pdo->query("SELECT * FROM players");
 
-$playerrattings = array();
+$playerratings = array();
 
 while($row = $q->fetch()){
   echo "<tr><td><input type=\"checkbox\" name =\"a-player[]\" value = ".$row["lname"]."/></td><td><input type=\"checkbox\" name = \"b-player[]\" value = ".$row["lname"]."/></td><td>".$row["fname"]." ".$row["lname"]."</td><td>".$row["position"]."</td></tr>\n";
-  $playerrattings[$row["lname"]] = $row["rating"];
+  $playerratings[$row["lname"]] = $row["rating"];
 }
 
 ?>
@@ -60,6 +60,7 @@ while($row = $q->fetch()){
 if(isset($_POST['submit'])){
 
     $pdo->query("TRUNCATE TABLE team");
+    $pdo->query("TRUNCATE TABLE opp");
 
     $selected_a_players = $_POST['a-player'];  // Storing Selected Value In Variable
     $selected_b_players = $_POST['b-player'];
@@ -72,7 +73,7 @@ if(isset($_POST['submit'])){
     echo("<ul>");
     for($i = 0; $i < $N; $i++) {
       echo("<li>".rtrim($selected_a_players[$i], '/')."</li>");
-      $a_player_ratings[rtrim($selected_a_players[$i], '/')] = $playerrattings[rtrim($selected_a_players[$i], '/')];
+      $a_player_ratings[rtrim($selected_a_players[$i], '/')] = $playerratings[rtrim($selected_a_players[$i], '/')];
     }
     echo("</ul>");
     echo("\n");
@@ -81,9 +82,7 @@ if(isset($_POST['submit'])){
     echo("<ul>");
     for($i = 0; $i < $N; $i++) {
       echo("<li>".rtrim($selected_b_players[$i], '/')."</li>");
-      $key = $b_player_ratings[rtrim($selected_b_players[$i], '/')];
-      $val = $playerrattings[rtrim($selected_b_players[$i], '/')];
-      $key = $val;
+      $b_player_ratings[rtrim($selected_b_players[$i], '/')] = $playerratings[rtrim($selected_b_players[$i], '/')];
     }
     echo("</ul>");
 
@@ -122,6 +121,8 @@ if(isset($_POST['submit'])){
 
     // Insert using explicit array elements
 
+    // Home team
+
     foreach($a_player_ratings as $lname => $rating) {
       $pdo->query("INSERT INTO team VALUES ('$lname','$rating')");
     }
@@ -129,6 +130,22 @@ if(isset($_POST['submit'])){
     // Get table state
 
     $q = $pdo->query("SELECT * FROM team");
+
+    while($row = $q->fetch()){
+      echo ($row["lname"]);
+      echo ($row["rating"]);
+      echo ("<br />\n");
+    }
+
+    // Opponent team
+
+    foreach($b_player_ratings as $lname => $rating) {
+      $pdo->query("INSERT INTO opp VALUES ('$lname','$rating')");
+    }
+
+    // Get table state
+
+    $q = $pdo->query("SELECT * FROM opp");
 
     while($row = $q->fetch()){
       echo ($row["lname"]);

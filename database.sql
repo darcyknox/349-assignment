@@ -12,6 +12,12 @@ CREATE TABLE team (
   PRIMARY KEY (lname)
 );
 
+CREATE TABLE opp (
+  lname varchar(20) NOT NULL,
+  rating varchar(20),
+  PRIMARY KEY (lname)
+);
+
 INSERT INTO players VALUES ('LeBron','James','Forward',98);
 INSERT INTO players VALUES ('Michael','Jordan','Guard',99);
 INSERT INTO players VALUES ('Kareem','Abdul-Jabbar','Center',95);
