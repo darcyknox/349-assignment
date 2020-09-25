@@ -70,6 +70,8 @@ Vagrant.configure("2") do |config|
     webserver.vm.provision "shell", inline: <<-SHELL
       apt-get update
       apt-get install -y apache2 php libapache2-mod-php php-mysql
+      apt-get install -y docker.io
+      adduser vagrant docker
 
       # Change VM's webserver's configuration to use shared folder.
       # (Look inside test-website.conf for specifics.)
@@ -94,6 +96,8 @@ Vagrant.configure("2") do |config|
     database.vm.provision "shell", inline: <<-SHELL
       # Update Ubuntu software packages.
       apt-get update
+      apt-get install -y docker.io
+      adduser vagrant docker
 
       # We create a shell variable MYSQL_PWD that contains the MySQL root password
       export MYSQL_PWD='insecure_mysqlroot_pw'
@@ -199,6 +203,9 @@ Vagrant.configure("2") do |config|
     webserver2.vm.provision "shell", inline: <<-SHELL
       apt-get update
       apt-get install -y apache2 php libapache2-mod-php php-mysql
+
+      apt-get install -y docker.io
+      adduser vagrant docker
 
       # Change VM's webserver's configuration to use shared folder.
       # (Look inside test-website.conf for specifics.)
