@@ -1,6 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# Fixes error message - "except is undefined"
 class Hash
   def slice(*keep_keys)
     h = {}
