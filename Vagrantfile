@@ -1,7 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Fixes error message - "except is undefined"
+# Fixes error message - "undefined HashMap method 'except'"
+# https://github.com/mitchellh/vagrant-aws/issues/566#issuecomment-580812210
 class Hash
   def slice(*keep_keys)
     h = {}
@@ -26,6 +27,10 @@ Vagrant.configure("2") do |config|
   config.vm.provider :aws do |aws, override|
 
     aws.region = "us-east-1"
+
+    # Override SMB synchronization
+    overrirde.nfs.functional = false
+    override.vm.allowed_synced_folder_types = :rsync
 
     aws.access_key_id = "ASIA3KENNYYNO56ZBMVT"
     aws.secret_access_key = "NgALztA2nSn46m9aMvxVo5YsHXiqjYtNlYlrhrOw"
