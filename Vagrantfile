@@ -28,9 +28,18 @@ Vagrant.configure("2") do |config|
 
     aws.region = "us-east-1"
 
-    # Override SMB synchronization
+    # These options force synchronisation of files to the VM's
+    # /vagrant directory using rsync, rather than using trying to use
+    # SMB (which will not be available by default).
     override.nfs.functional = false
     override.vm.allowed_synced_folder_types = :rsync
+
+    # You need to indicate the list of security groups your VM should
+    # be in. Each security group will be of the form "sg-...", and
+    # they should be comma-separated (if you use more than one) within
+    # square brackets.
+    #
+    aws.security_groups = ["sg-04873481591035c2d", "sg-086ed48d05be9c28f"]
 
     aws.access_key_id="ASIA3KENNYYNMRI74VNY"
     aws_secret_access_key="zho93uelYOyJsziI3vX99adBw230M83heot79MDD"
@@ -50,13 +59,13 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "webserver" do |webserver|
     webserver.vm.hostname = "webserver"
-    webserver.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+    #webserver.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
     #webserver.vm.network "private_network", ip: "192.168.33.10"
     #webserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
 
     webserver.vm.provision "shell", inline: <<-SHELL
       apt-get update
-      apt-get install -y apache2 php libapache2-mod-php php-mysql
+      apt-get install -y apache2 php libapache2-mod-php php-mysql awscli
 
       cp /vagrant/test-website.conf /etc/apache2/sites-available/
       a2ensite test-website
@@ -70,14 +79,14 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "webserver2" do |webserver2|
     webserver2.vm.hostname = "webserver2"
-    webserver2.vm.network "forwarded_port", guest: 80, host: 8081, host_ip: "127.0.0.1"
+    #webserver2.vm.network "forwarded_port", guest: 80, host: 8081, host_ip: "127.0.0.1"
     #webserver2.vm.network "private_network", ip: "192.168.33.12"
     #webserver2.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
 
 
     webserver2.vm.provision "shell", inline: <<-SHELL
       apt-get update
-      apt-get install -y apache2 php libapache2-mod-php php-mysql
+      apt-get install -y apache2 php libapache2-mod-php php-mysql awscli
       cp /vagrant/test-website2.conf /etc/apache2/sites-available/
       # activate our website configuration ...
       a2ensite test-website2
