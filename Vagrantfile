@@ -21,14 +21,6 @@ Vagrant.configure("2") do |config|
 
   #config.vm.box = "ubuntu/xenial64"
 
-  #config.vm.provision "docker" do |docker|
-    #docker.build_image "/vagrant",
-      #args: "-t app-test"
-    #docker.run "app-test",
-      #image: "app-test:latest",
-      #args: "-p 80:80"
-  #end
-
   config.vm.box = "dummy"
 
   config.vm.provider :aws do |aws, override|
@@ -52,10 +44,6 @@ Vagrant.configure("2") do |config|
     webserver.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
     #webserver.vm.network "private_network", ip: "192.168.33.10"
     #webserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
-
-    #webserver.vm.provider "docker" do |d1|
-      #d1.build_dir = "./www"
-    #end
 
     webserver.vm.provision "shell", inline: <<-SHELL
       apt-get update
@@ -122,9 +110,6 @@ Vagrant.configure("2") do |config|
     #webserver2.vm.network "private_network", ip: "192.168.33.12"
     #webserver2.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
 
-    #webserver2.vm.provider "docker" do |docker|
-
-    #end
 
     webserver2.vm.provision "shell", inline: <<-SHELL
       apt-get update

@@ -1,0 +1,7 @@
+#config.vm.provision "docker" do |docker|
+  #docker.build_image "/vagrant",
+    #args: "-t app-test"
+  #docker.run "app-test",
+    #image: "app-test:latest",
+    #args: "-p 80:80"
+#end
