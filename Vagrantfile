@@ -34,8 +34,8 @@ Vagrant.configure("2") do |config|
     override.nfs.functional = false
     override.vm.allowed_synced_folder_types = :rsync
 
-    aws.keypair_name = "349assign2"
-    override.ssh.private_key_path = "~/.ssh/349assign2.pem"
+    aws.keypair_name = "uskey1"
+    override.ssh.private_key_path = "~/.ssh/uskey1.pem"
 
     aws.instance_type = "t2.micro"
 
@@ -49,9 +49,9 @@ Vagrant.configure("2") do |config|
     aws.availability_zone = "us-east-1b"
     aws.subnet_id = "subnet-78b6cd35"
 
-    aws.access_key_id="ASIA3KENNYYNFSZ3P4FS"
-    aws.secret_access_key="jo0MxfgD4M3Nzqn2GXdop80eMDkh/e2e8kUb1EHM"
-    #aws.session_token="FwoGZXIvYXdzENP//////////wEaDLJJc8XBClKB64K6/yLLASUnGtElHEuwFtRRFuTaZA6i52lGctYXolPQsQo3uUjR5jm3our70lk9+gRWsOexkhFGTLB5DGCCk2WGjRBqcrS1SlesVOjG8KLBz7uSJNy5+gWhGSj5vb7r+rHmcLZz201bRKMYu9Folpw82r1NqVmg8ktdjIuVnEaBtZfODZb+R8PTPJxkCmJPHi/BpzU6Q5iIMe2UUAZijKZxyEf3ACe5sT9sxzEGjgA6lDIoReWvQfOnRxR5pjc198agCw3GixOrWCBTubnJaIfaKLPm8PsFMi3ewUGQhcVd+1HojVXdv3jYOUBfhcWG7aC4dRfdQ7H6Xj7MdNCA2lhpbJTj0P8="
+    aws.access_key_id="AKIAJVQAJI7Q3DEHZXRQ"
+    aws.secret_access_key="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"
+
 
     # Search criteria = us-east + hvm
     aws.ami = "ami-0f40c8f97004632f9"
@@ -65,7 +65,7 @@ Vagrant.configure("2") do |config|
     webserver.vm.hostname = "webserver"
     #webserver.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
     #webserver.vm.network "private_network", ip: "192.168.33.10"
-    webserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+    #webserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
 
     webserver.vm.provision "shell", inline: <<-SHELL
       apt-get update
