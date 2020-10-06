@@ -49,8 +49,8 @@ Vagrant.configure("2") do |config|
     aws.availability_zone = "us-east-1b"
     aws.subnet_id = "subnet-78b6cd35"
 
-    aws.access_key_id="AKIAJVQAJI7Q3DEHZXRQ"
-    aws.secret_access_key="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"
+    #aws.access_key_id="AKIAJVQAJI7Q3DEHZXRQ"
+    #aws.secret_access_key="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"
 
 
     # Search criteria = us-east + hvm
