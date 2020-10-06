@@ -29,18 +29,22 @@ Vagrant.configure("2") do |config|
     aws.region = "us-east-1"
 
     # Override SMB synchronization
-    overrirde.nfs.functional = false
+    override.nfs.functional = false
     override.vm.allowed_synced_folder_types = :rsync
 
-    aws.access_key_id = "ASIA3KENNYYNO56ZBMVT"
-    aws.secret_access_key = "NgALztA2nSn46m9aMvxVo5YsHXiqjYtNlYlrhrOw"
-    aws.session_token = "FwoGZXIvYXdzEKT//////////wEaDH/DPLynEJnXvs/ezyLLARRZ7YNZCd8mvuPz6m+JQuKGZjmU7HRzUhd5k7COEFlqa0L/8xDslspKJZY4kjHOy1IVkOSb22IxN0mAx/iXoFbx+fOv9bYBXHKtKS0UiXbyvdZd0XAALy8FnhFMkUIzb6CsnzyMrFhUHyjKneI05GGzS5Qly1pHq7H3PJMXOG3/4kWQR6Zf1oDiP+vmk6CZA8700pkLzgrlJYpCOJFRCe+kEghw+hH5yi5qRQlnDsUbq2cVZiHxyjF3b0uRBkhAAmcaCiUsjFZxB0MrKP/I5vsFMi0Mpb/GfEaAcfrazpivWDdhXUdtUZYetIQu/ORXXDg/gTH5Ea7WcdwUxwvFWbQ="
-    aws.keypair_name = "assign2"
+    aws.access_key_id="ASIA3KENNYYNMRI74VNY"
+    aws_secret_access_key="zho93uelYOyJsziI3vX99adBw230M83heot79MDD"
+    aws_session_token="FwoGZXIvYXdzEMz//////////wEaDG2Sy7OB7kJU8GvvsCLLAfBFvbcXfu5t0cMaa/1RhxJWN4zxLHFUGGqFW7a53/ivZDmbifFmnd9g5FBgU3xe/Llri3Jq4gau0VmiIIW8DuJPWqhPE1TvxeUSILUT2T9bdUsi/sWdbN+383asIyOBXkhXw5blleKmFI7xpnxtwgne2mcFO4ks8bBR5uMGY9cmnYPpnPDi102uO6copBnxps5kSP7ac0o92rDMx0pknTWlEnmkX0Jpdrsx64I/cnHmAnfaOeQdrJr7kgYstxaWmJF/u66bPXCkvt4oKIG37/sFMi0fkGBQPSACRUM7z4/DgwzNvY7XGgTGTWrM/KeAfRsqGelWHYzGFPJfEtT/Q+c="
 
+    aws.keypair_name = "349assign2.pem"
+
+    aws.instance_type = "t2.micro"
+
+    # Search criteria = us-east + ___ + ___
     aws.ami = "ami-0f40c8f97004632f9"
 
     override.ssh.username = "ubuntu"
-    override.ssh.private_key_path = "~/.ssh/assign2.pem"
+    override.ssh.private_key_path = "~/.ssh/349assign2.pem"
 
   end
 
