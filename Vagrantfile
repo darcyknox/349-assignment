@@ -37,6 +37,12 @@ Vagrant.configure("2") do |config|
     aws.keypair_name = "uskey1"
     override.ssh.private_key_path = "~/.ssh/uskey1.pem"
 
+    # These actions are done by default.
+    # Credentials should be entered in the shell environment.
+    #aws.access_key_id = ENV['AWS_ACCESS_KEY_ID']
+    #aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
+
+    # Using default instance type (medium) instead
     #aws.instance_type = "t2.micro"
 
     # You need to indicate the list of security groups your VM should
