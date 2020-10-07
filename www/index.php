@@ -34,6 +34,9 @@ ul {
 <body>
 <h1>NBA Greats Game Simulator</h1>
 
+<p>testing</p>
+<h1><a href='http://ec2-54-208-102-10.compute-1.amazonaws.com'>Click here to see who wins...</a></h1>
+
 <p>Select players for Team A, and players for Team B.</p>
 <p>Try to pick the same amount of players for both teams.</p>
 
@@ -80,7 +83,7 @@ if(isset($_POST['submit'])){
 
     $selected_a_players = $_POST['a-player'];
     $selected_b_players = $_POST['b-player'];
-    echo "<h1><a href='http://192.168.33.12'>Click here to see who wins...</a></h1>";
+    echo "<h1><a href='http://ec2-34-228-11-10.compute-1.amazonaws.com/'>Click here to see who wins...</a></h1>";
     $a_player_ratings = array();
     $b_player_ratings = array();
 

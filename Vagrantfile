@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
     aws.keypair_name = "uskey1"
     override.ssh.private_key_path = "~/.ssh/uskey1.pem"
 
-    aws.instance_type = "t2.micro"
+    #aws.instance_type = "t2.micro"
 
     # You need to indicate the list of security groups your VM should
     # be in. Each security group will be of the form "sg-...", and
@@ -48,10 +48,6 @@ Vagrant.configure("2") do |config|
 
     aws.availability_zone = "us-east-1b"
     aws.subnet_id = "subnet-78b6cd35"
-
-    #aws.access_key_id="AKIAJVQAJI7Q3DEHZXRQ"
-    #aws.secret_access_key="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"
-
 
     # Search criteria = us-east + hvm
     aws.ami = "ami-0f40c8f97004632f9"
@@ -81,25 +77,25 @@ Vagrant.configure("2") do |config|
 
   ### database was here ###
 
-  #config.vm.define "webserver2" do |webserver2|
-    #webserver2.vm.hostname = "webserver2"
+  config.vm.define "webserver2" do |webserver2|
+    webserver2.vm.hostname = "webserver2"
     #webserver2.vm.network "forwarded_port", guest: 80, host: 8081, host_ip: "127.0.0.1"
     #webserver2.vm.network "private_network", ip: "192.168.33.12"
     #webserver2.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
 
 
-    #webserver2.vm.provision "shell", inline: <<-SHELL
-      #apt-get update
-      #apt-get install -y apache2 php libapache2-mod-php php-mysql awscli
-      #cp /vagrant/test-website2.conf /etc/apache2/sites-available/
+    webserver2.vm.provision "shell", inline: <<-SHELL
+      apt-get update
+      apt-get install -y apache2 php libapache2-mod-php php-mysql awscli
+      cp /vagrant/test-website2.conf /etc/apache2/sites-available/
       # activate our website configuration ...
-      #a2ensite test-website2
+      a2ensite test-website2
       # ... and disable the default website provided with Apache
-      #a2dissite 000-default
+      a2dissite 000-default
       # Reload the webserver configuration, to pick up our changes
-      #service apache2 reload
-    #SHELL
+      service apache2 reload
+    SHELL
 
-  #end
+  end
 
 end
