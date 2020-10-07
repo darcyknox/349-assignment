@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS `database-1`;
+USE `database-1`;
+
 CREATE TABLE players (
   fname varchar(20) NOT NULL,
   lname varchar(20) NOT NULL,
