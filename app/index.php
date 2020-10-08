@@ -15,7 +15,7 @@
 
   <h2 id="winText"></h2>
 
-  <p><a href="">Return to player selection</a></p>
+  <!-- <p><a href="">Return to player selection</a></p> -->
 
 
 <?php
@@ -24,13 +24,6 @@
   $db_name   = 'database-1';
   $db_user   = 'admin';
   $db_passwd = 'knoda778';
-
-  /*
-  $db_host   = '192.168.33.11';
-  $db_name   = 'fvision';
-  $db_user   = 'webuser';
-  $db_passwd = 'insecure_db_pw';
-  */
 
   $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 

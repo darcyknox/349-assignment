@@ -34,8 +34,6 @@ ul {
 <body>
 <h1>NBA Greats Game Simulator</h1>
 
-<p>testing</p>
-
 <p>Select players for Team A, and players for Team B.</p>
 <p>Try to pick the same amount of players for both teams.</p>
 
@@ -50,13 +48,6 @@ $db_host   = 'database-1.c1ijhezymkfb.us-east-1.rds.amazonaws.com';
 $db_name   = 'database-1';
 $db_user   = 'admin';
 $db_passwd = 'knoda778';
-
-/*
-$db_host   = '192.168.33.11';
-$db_name   = 'fvision';
-$db_user   = 'webuser';
-$db_passwd = 'insecure_db_pw';
-*/
 
 $pdo_dsn = "mysql:host=$db_host;dbname=$db_name";
 
@@ -89,7 +80,6 @@ if(isset($_POST['submit'])){
 
     $selected_a_players = $_POST['a-player'];
     $selected_b_players = $_POST['b-player'];
-    echo "<h1><a href=''>Click here to see who wins...</a></h1>";
     $a_player_ratings = array();
     $b_player_ratings = array();
 
